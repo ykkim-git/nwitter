@@ -80,3 +80,11 @@ import { authService } from "fbase.js";
 const [isLoggedIn, setIsLoggedIn] = useState(authService.currentUser);
 
 ```
+___
+
+## using github auth
+1. Firesbase Authentication 페이지
+2. 깃헙 setting -> developer applications -> OAuth Apps -> Register
+3. Application name, Homepage URL(from firebase), callback URL(from firebase) 입력 후 Register
+4. 만들어진 Cliend ID를 firebase에 입력
+5. 완료
