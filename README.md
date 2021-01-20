@@ -207,8 +207,23 @@ import "firebase/firestore";
 export const dbService = firebase.firestore();
 
 in Home.js
+const [nweet, setNweet] = useState(""); // set nweet at DB
+  const [nweets, setNweets] = useState([]); // get nweet from DB
+
+// set nweet
 dbService.collection("nweets").add({
       nweet: nweet,
     });
 
+// get nweets
+  const getNweets = async () => {
+    const dbNweets = await dbService.collection("nweets").get();
+    console.log(dbNweets);
+     dbNweets.forEach((document) => {
+      setNweets((prev) => [document.data(), ...prev]);
+    });
+  };
+  useEffect(() => {
+    getNweets();
+  }, []);
 ```
