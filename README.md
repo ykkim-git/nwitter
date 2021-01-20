@@ -150,3 +150,30 @@ useEffect(() => {
   });
 }, []);
 ```
+
+---
+
+## Social Login
+
+```js
+in fbase.js
+export const firebaseInstance = firebase;
+
+in Auth.js
+ const onSocialClick = async (event) => {
+    const {
+      target: { name },
+    } = event;
+
+    let provider;
+    if (name === "google") {
+      provider = new firebaseInstance.auth.GoogleAuthProvider();
+    } else if (name === "github") {
+      provider = new firebaseInstance.auth.GithubAuthProvider();
+    }
+
+    await authService.signInWithPopup(provider);
+  };
+
+**google, github 로그인 완료**
+```

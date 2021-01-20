@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import AppRouter from "components/Router.js";
 import { authService } from "fbase.js";
-// import Loader from "components/Loader.js";
 import loader from "assets/loader.gif";
 
 function App() {
@@ -34,7 +33,7 @@ function App() {
       ) : (
         <img src={loader} alt="loader" style={loaderStyle} />
       )}
-      {init ? <footer>&copy; Nwitter {new Date().getFullYear()}</footer> : null}
+      {init ? <footer>&copy; {new Date().getFullYear()} Nwitter </footer> : null}
     </>
   );
 }
