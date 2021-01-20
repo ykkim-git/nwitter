@@ -1,11 +1,13 @@
+import Nweet from "components/Nweet";
 import { dbService } from "fbase";
 import React, { useEffect, useState } from "react";
 
-const Home = () => {
+const Home = ({ userObj }) => {
   const [nweet, setNweet] = useState(""); // set nweet at DB
   const [nweets, setNweets] = useState([]); // get nweet from DB
 
-  // get nweets
+  /** get nweets */
+  /**
   const getNweets = async () => {
     const dbNweets = await dbService.collection("nweets").get();
     dbNweets.forEach((document) => {
@@ -13,14 +15,21 @@ const Home = () => {
         ...document.data(),
         id: document.id,
       };
-      /** set 함수쓸때 값 대신에 함수를 전달하면
-      리액트는 이전값에 접근할 수 있게 된다. */
+      //set 함수쓸때 값 대신에 함수를 전달하면 리액트는 이전값에 접근할 수 있게 된다.
       setNweets((prev) => [nweetObject, ...prev]);
     });
   };
+  */
 
   useEffect(() => {
-    getNweets();
+    // getNweets();
+    dbService.collection("nweets").onSnapshot((snapshot) => {
+      const nweetArray = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setNweets(nweetArray);
+    });
   }, []);
 
   const onSubmit = async (event) => {
@@ -29,16 +38,18 @@ const Home = () => {
     await dbService.collection("nweets").add({
       text: nweet,
       createdAt: Date.now(),
-      
+      creatorId: userObj.uid,
     });
     setNweet("");
   };
+
   const onChange = (event) => {
     const {
       target: { value },
     } = event;
     setNweet(value);
   };
+
   return (
     <div>
       <form onSubmit={onSubmit}>
@@ -54,9 +65,11 @@ const Home = () => {
 
       <div>
         {nweets.map((nweet) => (
-          <div key={nweet.id}>
-            <h4>{nweet.nweet}</h4>
-          </div>
+          <Nweet
+            key={nweet.id}
+            nweetObj={nweet}
+            isOwner={nweet.creatorId === userObj.uid}
+          />
         ))}
       </div>
     </div>

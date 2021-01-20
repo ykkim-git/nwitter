@@ -227,3 +227,18 @@ dbService.collection("nweets").add({
     getNweets();
   }, []);
 ```
+
+## Realtime connect with DB
+### db.collection.onSnapshot
+```js
+useEffect(() => {
+  // getNweets();
+  dbService.collection("nweets").onSnapshot((snapshot) => {
+    const nweetArray = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    setNweets(nweetArray);
+  });
+}, []);
+```

@@ -6,6 +6,7 @@ import loader from "assets/loader.gif";
 function App() {
   const [init, setInit] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(authService.currentUser);
+  const [userObj, setUserObj] = useState(null);
 
   // firebase가 프로그램을 초기화하길 기다리고, 로그인 되었을 때 isLoggedIn 값 변경
   useEffect(() => {
@@ -15,6 +16,7 @@ function App() {
     authService.onAuthStateChanged((user) => {
       if (user) {
         setIsLoggedIn(true);
+        setUserObj(user);
       } else {
         setIsLoggedIn(false);
       }
@@ -29,11 +31,13 @@ function App() {
   return (
     <>
       {init ? (
-        <AppRouter isLoggedIn={isLoggedIn} />
+        <AppRouter isLoggedIn={isLoggedIn} userObj={userObj} />
       ) : (
         <img src={loader} alt="loader" style={loaderStyle} />
       )}
-      {init ? <footer>&copy; {new Date().getFullYear()} Nwitter </footer> : null}
+      {init ? (
+        <footer>&copy; {new Date().getFullYear()} Nwitter </footer>
+      ) : null}
     </>
   );
 }
