@@ -175,5 +175,40 @@ in Auth.js
     await authService.signInWithPopup(provider);
   };
 
-**google, github 로그인 완료**
+// google, github 로그인 완료
+```
+
+---
+
+## Logout
+
+```js
+in onClick Event
+authService.signOut();
+
+// router push after logout
+const history = useHistory();
+history.push("/");
+```
+
+---
+
+## Database (NoSQL)
+
+1. firebase 내 Cloud Firestore 메뉴 선택
+2. test mode 사용
+3. asia-northeast3 (seoul) 선택
+
+### make collection when nweet submit
+
+```js
+in fbase.js
+import "firebase/firestore";
+export const dbService = firebase.firestore();
+
+in Home.js
+dbService.collection("nweets").add({
+      nweet: nweet,
+    });
+
 ```
