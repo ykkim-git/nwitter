@@ -1,12 +1,15 @@
+import { findByTestId } from "@testing-library/react";
 import Nweet from "components/Nweet";
-import { dbService } from "fbase";
+import { v4 as uuidv4 } from "uuid";
+import { dbService, storageService } from "fbase";
 import React, { useEffect, useState } from "react";
 
 const Home = ({ userObj }) => {
   const [nweet, setNweet] = useState(""); // set nweet at DB
   const [nweets, setNweets] = useState([]); // get nweet from DB
+  const [attachment, setAttachment] = useState();
 
-  /** get nweets */
+  /** old get nweets */
   /**
   const getNweets = async () => {
     const dbNweets = await dbService.collection("nweets").get();
@@ -34,13 +37,16 @@ const Home = ({ userObj }) => {
 
   const onSubmit = async (event) => {
     event.preventDefault();
+    const fileRef = storageService.ref().child(`${userObj.uid}/${uuidv4()}`);
+    const response = await fileRef.putString(attachment, "data_url");
+    console.log(response);
     // set nweet
-    await dbService.collection("nweets").add({
+    /** await dbService.collection("nweets").add({
       text: nweet,
       createdAt: Date.now(),
       creatorId: userObj.uid,
     });
-    setNweet("");
+    setNweet(""); */
   };
 
   const onChange = (event) => {
@@ -49,10 +55,24 @@ const Home = ({ userObj }) => {
     } = event;
     setNweet(value);
   };
-  
+
   const onFileChange = (event) => {
-    console.log(event.target.files);
-  }
+    const {
+      target: { files },
+    } = event;
+    const theFile = files[0];
+    // file api
+    const reader = new FileReader();
+    reader.onloadend = (finishedEvent) => {
+      const {
+        currentTarget: { result },
+      } = finishedEvent;
+      setAttachment(result);
+    };
+    reader.readAsDataURL(theFile);
+  };
+
+  const onClearPhotoClick = () => setAttachment(null);
 
   return (
     <>
@@ -66,18 +86,24 @@ const Home = ({ userObj }) => {
         />
         <input type="file" accept="image/*" onChange={onFileChange} />
         <input type="submit" value="Nweet" />
-        </form>
-        
-        <div>
+        {attachment && (
+          <div>
+            <img src={attachment} width="50px" height="50px" />
+            <button onClick={onClearPhotoClick}>Clear</button>
+          </div>
+        )}
+      </form>
+
+      <div>
         {nweets.map((nweet) => (
           <Nweet
             key={nweet.id}
             nweetObj={nweet}
             isOwner={nweet.creatorId === userObj.uid}
           />
-          ))}
+        ))}
       </div>
     </>
-    );
+  );
 };
 export default Home;

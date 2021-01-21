@@ -277,9 +277,38 @@ ___
 
 ## File upload
 
-### Firebase 웹 내 Storage에서 Get started
+### 파일 미리보기
+1. input에서 파일을 선택
+2. reader를 만든다.
+```js
+const theFile = event.target.files; // 내가 선택한 파일
+const reader = new FileReader();
+```
+3. 만들어진 리더로 파일을 읽는다.
+```js
+reader.readAsDataaURL(theFile);
+```
+4. 이벤트리스너 추가
+```js
+reader.onloadend = (finishedEvent) => {
+    console.log(finishedEvent)
+  }
+```
+
+### 스토리지 사용하기
+```js
+in fbase.js
+import "firebase/storage";
+export const storageService = firebase.storage();
+```
+
+### 사진에 이름 달아주기
+> npm install uuid: 식별자 생성 library
 
 ```js
-
+in nweet button submit event of Home.js
+storageService.ref().child(`${userObj.uid}/${uuidv4()}`);
 
 ```
+
+###
