@@ -229,7 +229,9 @@ dbService.collection("nweets").add({
 ```
 
 ## Realtime connect with DB
+
 ### db.collection.onSnapshot
+
 ```js
 useEffect(() => {
   // getNweets();
@@ -241,4 +243,43 @@ useEffect(() => {
     setNweets(nweetArray);
   });
 }, []);
+```
+
+---
+
+## Delete and Update
+
+### delete
+
+```js
+const onDeleteClick = async () => {
+  const ok = window.confirm("Are you sure want to delete this nweet?");
+  if (ok) {
+    await dbService.doc(`nweets/${nweetObj.id}`).delete();
+  }
+};
+
+```
+
+### Update
+
+```js
+
+const onSubmit = async (event) => {
+  event.preventDefault();
+  await dbService.doc(`nweets/${nweetObj.id}`).update({
+    text: newNweet,
+  });
+  setEdit(false);
+};
+```
+___
+
+## File upload
+
+### Firebase 웹 내 Storage에서 Get started
+
+```js
+
+
 ```

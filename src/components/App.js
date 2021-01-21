@@ -19,6 +19,7 @@ function App() {
         setUserObj(user);
       } else {
         setIsLoggedIn(false);
+        setUserObj(null);
       }
       setInit(true);
     });
@@ -36,7 +37,8 @@ function App() {
         <img src={loader} alt="loader" style={loaderStyle} />
       )}
       {init ? (
-        <footer>&copy; {new Date().getFullYear()} Nwitter </footer>
+        // <footer>&copy; {new Date().getFullYear()} Nwitter </footer>
+        <div></div>
       ) : null}
     </>
   );
