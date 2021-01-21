@@ -311,4 +311,10 @@ storageService.ref().child(`${userObj.uid}/${uuidv4()}`);
 
 ```
 
-###
+### 사진 삭제
+
+```js
+in 삭제 confirm
+
+await storageService.refFromURL(nweetObj.attachmentUrl).delete();
+```
