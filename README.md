@@ -336,3 +336,19 @@ in package.json
 > npm i gh-pages
 
 > npm run deploy
+
+___
+
+## Firebase에 접근설정 하기
+Cloud Firestore -> rulees -> 
+```js
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if request.auth != null;
+      // 로그인 되어있을때만 read, write 가능
+    }
+  }
+}
+```
