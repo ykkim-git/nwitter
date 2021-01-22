@@ -318,3 +318,20 @@ in 삭제 confirm
 
 await storageService.refFromURL(nweetObj.attachmentUrl).delete();
 ```
+___
+
+## Deploying github pages
+
+```json
+in package.json
+"homepage": "https://ykkim-git.github.io/nwitter"  추가
+
+"scripts": {
+  "predeploy": "npm run build",
+  "deploy": "gh-pages -d build"
+}
+```
+
+> npm i gh-pages
+
+> npm run deploy
