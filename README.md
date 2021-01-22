@@ -352,3 +352,10 @@ service cloud.firestore {
   }
 }
 ```
+
+## set API_KEY Security at google developers
+> https://console.developers.google.com/apis/credentials/
+
+### 사용자 인증정보에 gh-pages, localhost, firebase domain 추가하기
+> ex: nwitter-42769.firebaseapp.com/*
+
