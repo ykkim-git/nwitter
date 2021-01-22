@@ -1,6 +1,6 @@
 import { authService } from "fbase";
 import React from "react";
-import { useState } from "react/cjs/react.development";
+import { useState } from "react";
 
 const inputStyles = {};
 
