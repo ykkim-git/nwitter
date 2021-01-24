@@ -4,6 +4,20 @@
 ### demo : https://ykkim-git.github.io/nwitter/
 ### 2021년 2월 19일까지 firebase DB사용 가능
 ---
+### 1. main page
+![main](./src/assets/main.png)
+
+### 2. social login (Google, Github)
+![social login](./src/assets/githublogin.png)
+
+### 3. tweet page
+![tweetpage](./src/assets/tweetpage.png)
+
+### 4. mypage
+![tweetpage](./src/assets/mypage.png)
+
+___
+
 
 ## create app
 

@@ -1,9 +1,8 @@
-import { dbService, storageService } from "fbase";
-import React from "react";
-import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { dbService, storageService } from "fbase";
+import React, { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 const NweetFactory = ({ userObj }) => {
   const [nweet, setNweet] = useState(""); // set nweet at DB

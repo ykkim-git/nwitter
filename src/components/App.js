@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import loader from "assets/loader.gif";
 import AppRouter from "components/Router";
 import { authService } from "fbase";
-import loader from "assets/loader.gif"
+import React, { useEffect, useState } from "react";
 
 function App() {
   const [init, setInit] = useState(false);
