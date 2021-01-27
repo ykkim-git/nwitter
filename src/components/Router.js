@@ -22,6 +22,7 @@ const AppRouter = ({ refreshUser, isLoggedIn, userObj }) => {
                 justifyContent: "center",
               }}
             >
+              {/* /** exact: 정확하게 path가 매치될 때 컴포넌트를 불러옴 */}
               <Route exact path="/">
                 <Home userObj={userObj} />
               </Route>
